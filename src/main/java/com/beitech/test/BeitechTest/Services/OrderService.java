@@ -15,10 +15,9 @@ public class OrderService {
     @Autowired
     private OrderRepository order_repo;
 
-    public List<Order> getOrderByCustomerId(int customer_id){
+    public List<Order> getOrderByCustomerId(int id_customer){
         List<Order> list_orders = new ArrayList<>();
-        order_repo.findByCustomerId(customer_id).forEach(list_orders::add);
-        return list_orders;
+        return order_repo.findAll();
     }
 
 }
