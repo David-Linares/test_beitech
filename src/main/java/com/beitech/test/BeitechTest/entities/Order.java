@@ -4,6 +4,7 @@ package com.beitech.test.BeitechTest.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Order {
@@ -11,7 +12,8 @@ public class Order {
     @Id
     @GeneratedValue
     private int order_id;
-    private int id_customer;
+    @ManyToOne
+    private Customer id_customer;
     private String delivery_address;
 
     public int getOrder_id() {
@@ -20,14 +22,6 @@ public class Order {
 
     public void setOrder_id(int order_id) {
         this.order_id = order_id;
-    }
-
-    public int getId_customer() {
-        return id_customer;
-    }
-
-    public void setId_customer(int id_customer) {
-        this.id_customer = id_customer;
     }
 
     public String getDelivery_address() {
