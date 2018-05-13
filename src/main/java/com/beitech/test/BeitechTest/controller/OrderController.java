@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
+@RequestMapping("/orders")
 public class OrderController {
 
     private OrderService order_service;
@@ -23,15 +25,15 @@ public class OrderController {
         this.order_service = order_repo;
     }
 
-//    @RequestMapping(method = RequestMethod.GET)
-//    public List<Order> findAllOrders(){
-//        return order_service.findAll();
-//    }
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Order> findAllOrders(){
+        return order_service.getAllOrders();
+    }
 
 
-    @RequestMapping("/orders/customer/{customer_id}")
-    public List<Order> findOrdersByCustomer(@PathVariable int customer_id){
-        return order_service.getOrderByCustomerId(customer_id);
+    @RequestMapping("/customer/{customerId}")
+    public List<Order> findOrdersByCustomer(@PathVariable int customerId){
+        return order_service.getOrdersByCustomerId(customerId);
     }
 
 //    @RequestMapping(method = RequestMethod.POST)

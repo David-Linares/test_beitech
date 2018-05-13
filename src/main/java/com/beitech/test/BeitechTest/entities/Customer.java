@@ -1,45 +1,51 @@
 package com.beitech.test.BeitechTest.entities;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Customer {
 
     @Id
     @GeneratedValue
-    private int customer_id;
-    private String name_customer;
-    private String email_customer;
+    //@Column(name = "customer_id")
+    private int customerId;
+    private String nameCustomer;
+    private String emailCustomer;
+    @OneToMany(mappedBy = "customer")
+    private List<Order> orders;
 
-    public int getCustomer_id() {
-        return customer_id;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public String getName_customer() {
-        return name_customer;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
-    public void setName_customer(String name_customer) {
-        this.name_customer = name_customer;
+    public String getNameCustomer() {
+        return nameCustomer;
     }
 
-    public String getEmail_customer() {
-        return email_customer;
+    public void setNameCustomer(String nameCustomer) {
+        this.nameCustomer = nameCustomer;
     }
 
-    public void setEmail_customer(String email_customer) {
-        this.email_customer = email_customer;
+    public String getEmailCustomer() {
+        return emailCustomer;
+    }
+
+    public void setEmailCustomer(String emailCustomer) {
+        this.emailCustomer = emailCustomer;
     }
 
     @Override
     public String toString() {
         return "Customer{" +
-                "customer_id=" + customer_id +
-                ", name_customer='" + name_customer + '\'' +
-                ", email_customer='" + email_customer + '\'' +
+                "customerId=" + customerId +
+                ", nameCustomer='" + nameCustomer + '\'' +
+                ", emailCustomer='" + emailCustomer + '\'' +
                 '}';
     }
 }

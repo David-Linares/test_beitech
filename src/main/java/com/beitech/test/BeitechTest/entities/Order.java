@@ -9,29 +9,42 @@ public class Order {
 
     @Id
     @GeneratedValue
-    private int order_id;
+    private int orderId;
     @ManyToOne
-    private Customer id_customer;
-    private String delivery_address;
+    @JoinColumn(name = "id_customer")
+    private Customer customer;
+    private String deliveryAddress;
 
-    public int getOrder_id() {
-        return order_id;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public String getDelivery_address() {
-        return delivery_address;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
-    public void setDelivery_address(String delivery_address) {
-        this.delivery_address = delivery_address;
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public String getDeliveryAddress() {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(String deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
     }
 
     @Override
     public String toString() {
         return "Order{" +
-                "order_id=" + order_id +
-                ", id_customer=" + id_customer +
-                ", delivery_address='" + delivery_address + '\'' +
+                "order_id=" + orderId +
+                ", idCustomer=" + customer +
+                ", deliveryAddress='" + deliveryAddress + '\'' +
                 '}';
     }
 }
