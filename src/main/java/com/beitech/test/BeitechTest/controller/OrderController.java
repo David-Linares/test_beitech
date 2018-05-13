@@ -18,22 +18,26 @@ import java.util.List;
 @RequestMapping("/orders")
 public class OrderController {
 
-    private OrderService order_service;
+    private OrderService orderService;
 
     @Autowired
-    public OrderController(OrderService order_repo) {
-        this.order_service = order_repo;
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     public List<Order> findAllOrders(){
-        return order_service.getAllOrders();
+        return orderService.getAllOrders();
     }
-
 
     @RequestMapping("/customer/{customerId}")
     public List<Order> findOrdersByCustomer(@PathVariable int customerId){
-        return order_service.getOrdersByCustomerId(customerId);
+        return orderService.getOrdersByCustomerId(customerId);
+    }
+
+    @RequestMapping("/customer/{customerId}")
+    public List<Order> findOrdersDetail(@PathVariable int customerId){
+        return orderService.getOrdersByCustomerId(customerId);
     }
 
 //    @RequestMapping(method = RequestMethod.POST)
