@@ -9,7 +9,6 @@ public class Customer {
 
     @Id
     @GeneratedValue
-    //@Column(name = "customer_id")
     private int customerId;
     private String nameCustomer;
     private String emailCustomer;

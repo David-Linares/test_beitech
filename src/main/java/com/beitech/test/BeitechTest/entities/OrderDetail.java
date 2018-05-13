@@ -4,7 +4,7 @@ package com.beitech.test.BeitechTest.entities;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "orders")
+@Table (name = "orders_detail")
 public class OrderDetail {
 
     @Id
@@ -15,6 +15,15 @@ public class OrderDetail {
     private Order order;
     private String productDescription;
     private double price;
+
+    public OrderDetail() {
+    }
+
+    public OrderDetail(Order order, String productDescription, double price) {
+        this.order = order;
+        this.productDescription = productDescription;
+        this.price = price;
+    }
 
     public int getOrderDetailId() {
         return orderDetailId;
