@@ -7,7 +7,7 @@ import com.beitech.test.BeitechTest.services.OrderService;
 import com.beitech.test.BeitechTest.entities.Customer;
 import com.beitech.test.BeitechTest.entities.Order;
 import com.beitech.test.BeitechTest.entities.OrderDetail;
-import com.beitech.test.BeitechTest.util.ResponseFormat;
+import com.beitech.test.BeitechTest.util.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:9000")
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
@@ -29,14 +29,14 @@ public class OrderController {
     private OrderService orderService;
     private CustomerService customerService;
     private OrderDetailService orderDetailService;
-    private ResponseFormat responseFormat;
+    private Util util;
 
     @Autowired
     public OrderController(OrderService orderService, CustomerService customerService, OrderDetailService orderDetailService) {
         this.orderService = orderService;
         this.customerService = customerService;
         this.orderDetailService = orderDetailService;
-        this.responseFormat = new ResponseFormat();
+        this.util = new Util();
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -45,15 +45,13 @@ public class OrderController {
     }
 
     @RequestMapping("/customer/{customerId}")
-    public List<Order> findOrdersByCustomer(@PathVariable int customerId, @RequestParam(value = "initial_date", required = true) String initialDateParam, @RequestParam(value = "finish_date", required = true) String finishDateParam){
+    public List<Order> findOrdersByCustomer(@PathVariable int customerId, @RequestParam(value = "initial_date", required=true) String initialDateParam, @RequestParam(value = "finish_date", required = true) String finishDateParam){
         initialDateParam += " 00:00:00";
         finishDateParam += " 23:59:59";
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date initialDate = null;
         Date finishDate = null;
         try {
-            System.out.println(initialDateParam);
-            System.out.println(finishDateParam);
             initialDate = formatter.parse(initialDateParam);
             finishDate = formatter.parse(finishDateParam);
         } catch (ParseException e) {
@@ -79,11 +77,11 @@ public class OrderController {
                 OrderDetail newOrderDetail = new OrderDetail(orderCreate, orderDetail.get("product_description"), Double.parseDouble(orderDetail.get("price")));
                 orderDetailService.createNewOrderDetail(newOrderDetail);
             }
-            response = responseFormat.createOrderResponse();
+            response = util.createOrderResponse();
         }catch (Exception e){
             System.out.println("Se ha producido un error...");
             e.printStackTrace();
-            response = responseFormat.errorCreateOrder(e.getMessage());
+            response = util.errorCreateOrder(e.getMessage());
         }
         return new ResponseEntity(response, (HttpStatus) response.get("status"));
     }

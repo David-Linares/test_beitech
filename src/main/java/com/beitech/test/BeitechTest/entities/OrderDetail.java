@@ -10,8 +10,8 @@ public class OrderDetail {
     @Id
     @GeneratedValue
     private int orderDetailId;
-    @ManyToOne
-    @JoinColumn(name = "id_order")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_order", nullable = true)
     private Order order;
     private String productDescription;
     private double price;
@@ -31,14 +31,6 @@ public class OrderDetail {
 
     public void setOrderDetailId(int orderDetailId) {
         this.orderDetailId = orderDetailId;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
     }
 
     public String getProductDescription() {
@@ -61,7 +53,7 @@ public class OrderDetail {
     public String toString() {
         return "OrderDetail{" +
                 "orderDetailId=" + orderDetailId +
-                ", order=" + order +
+//                ", order=" + order +
                 ", productDescription='" + productDescription + '\'' +
                 ", price=" + price +
                 '}';

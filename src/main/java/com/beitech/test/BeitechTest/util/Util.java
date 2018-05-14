@@ -1,14 +1,21 @@
 package com.beitech.test.BeitechTest.util;
 
+import com.beitech.test.BeitechTest.entities.Products;
+import com.beitech.test.BeitechTest.services.CustomerService;
 import org.springframework.http.HttpStatus;
+import sun.reflect.annotation.ExceptionProxy;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ResponseFormat {
+public class Util {
 
-    public ResponseFormat() {
+
+    CustomerService customerService = new CustomerService();
+
+    public Util() {
     }
 
     public Map<String, Object> createOrderResponse(){

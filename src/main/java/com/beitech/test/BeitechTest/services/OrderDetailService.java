@@ -19,7 +19,7 @@ public class OrderDetailService {
     }
 
     public List<OrderDetail> getListByOrderId(int orderId){
-        return orderDetailRepo.findByOrderCustomerCustomerId(orderId);
+        return orderDetailRepo.findByOrderOrderId(orderId);
     }
 
 

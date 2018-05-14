@@ -20,6 +20,10 @@ public class Order {
     @Column(name = "date_order", columnDefinition="TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateOrder;
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "order")
+    private Set<OrderDetail> detail = new HashSet<>();
 
 
     public Order() {
@@ -60,6 +64,14 @@ public class Order {
 
     public void setDateOrder(Date dateOrder) {
         this.dateOrder = dateOrder;
+    }
+
+    public Set<OrderDetail> getDetail() {
+        return detail;
+    }
+
+    public void setDetail(Set<OrderDetail> detail) {
+        this.detail = detail;
     }
 
     @Override
